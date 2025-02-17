@@ -3,7 +3,6 @@ import { base_url } from "@/services/api";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-import Carousel from "react-native-snap-carousel";
 import useGetProducts from "@/services/useGetProducts";
 import { useCart } from "@/state/use-cart";
 import { useFavorites } from "@/state/use-favorites";
@@ -24,16 +23,13 @@ import Header from "@/components/Header";
 import BannerCards from "@/components/BannerCards";
 import Titles from "@/components/Titles";
 import Footer from "@/components/Footer";
-
-const { width } = Dimensions.get("window");
+import ChooseCategory from "@/components/ChooseCategory";
 
 const HomeScreen = () => {
   const filters = useMemo(() => ({ bestSeller: true }), []);
   const { result, loading } = useGetProducts(filters);
   const { addItem } = useCart();
   const { addFavorite, items: favorites } = useFavorites();
-
-  console.log("result", result);
 
   const renderItem = ({ item }: { item: Product }) => (
     <View style={styles.card}>
@@ -58,26 +54,26 @@ const HomeScreen = () => {
     </View>
   );
   return (
-      <ScrollView>
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <BannerCards />
-      <Titles text="Productos más vendidos" />
+    <ScrollView>
+      <SafeAreaView style={styles.container}>
+        <Header />
+        <BannerCards />
+        <Titles text="Productos más vendidos" />
 
-      {loading || !result ? (
-        <Text>Cargando...</Text>
-      ) : (
-        <FlatList
-          numColumns={2}
-          data={result}
-          keyExtractor={(item) => item.productName}
-          renderItem={renderItem}
-        />
-      )}
-
-      <Footer />
-    </SafeAreaView>
-      </ScrollView>
+        {loading || !result ? (
+          <Text>Cargando...</Text>
+        ) : (
+          <FlatList
+            numColumns={2}
+            data={result}
+            keyExtractor={(item) => item.productName}
+            renderItem={renderItem}
+          />
+        )} 
+        <ChooseCategory />
+        <Footer />
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

@@ -7,6 +7,8 @@ const useGetProducts = (filters?: any) => {
   const [result, setResult] = useState<Product[]>([]);
   const [error, setError] = useState<string>("");
 
+
+  console.log("filters", filters)
   const fetchProducts = async () => {
     try {
       setLoading(true);

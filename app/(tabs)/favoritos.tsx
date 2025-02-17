@@ -2,13 +2,13 @@ import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 
 import Header from "@/components/Header";
-import FiltersColorsControl from "@/components/FiltersColorsControl";
 
-const Products = () => {
+
+const Favoritos = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <FiltersColorsControl />
+
     </SafeAreaView>
   );
 };
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Products;
+export default Favoritos;
