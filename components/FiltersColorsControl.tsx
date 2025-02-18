@@ -59,16 +59,18 @@ const FiltersColorsControl = () => {
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={color}
-          onValueChange={(itemValue: string) => setColor(itemValue)}
+          onValueChange={(itemValue: string) =>
+            setColor(itemValue === "Todos" ? "" : itemValue)
+          }
           style={styles.picker}
         >
-          <Picker.Item label="Filtrar por color" value="" />
+          <Picker.Item label="Todos" value="Todos" />
           {colorArray.map((color, index) => (
             <Picker.Item
               key={index}
               label={color.toUpperCase()}
               value={color}
-              color="#000" // Estilo de texto del Picker.Item
+              color="#000"
             />
           ))}
         </Picker>
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   picker: {
     width: "100%",
     height: 50,
-    color: "#000", // Color de texto del Picker
+    color: "#000",
   },
   card: {
     backgroundColor: "white",
@@ -128,7 +130,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 10,
-
   },
   actions: {
     flexDirection: "row",
