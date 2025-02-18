@@ -1,8 +1,17 @@
 import React from "react";
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import useGetCategories from "@/services/useGetCategories";
 import { base_url } from "@/services/api";
+import Loading from "./Loading";
 
 const ChooseCategory = () => {
   const navigation = useNavigation();
@@ -14,7 +23,7 @@ const ChooseCategory = () => {
 
       {/* Loader mientras se cargan los datos */}
       {loading && !result ? (
-        <ActivityIndicator size="large" color="#D81B60" style={styles.loader} />
+        <Loading />
       ) : (
         <FlatList
           data={result}
@@ -24,7 +33,9 @@ const ChooseCategory = () => {
           contentContainerStyle={styles.list}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("CategoryScreen", { slug: item.slug })}
+              onPress={() =>
+                navigation.navigate("CategoryScreen", { slug: item.slug })
+              }
               style={styles.card}
             >
               <ImageBackground
@@ -61,9 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
   },
-  loader: {
-    marginTop: 20,
-  },
+
   card: {
     marginHorizontal: 10,
     borderRadius: 10,

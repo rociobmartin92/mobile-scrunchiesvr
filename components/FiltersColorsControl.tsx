@@ -16,6 +16,7 @@ import { useFavorites } from "@/state/use-favorites";
 import { Product } from "@/types";
 import { base_url } from "@/services/api";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ListOf from "./ListOf";
 
 const FiltersColorsControl = () => {
   const { result: colorResult } = useGetColorsList();
@@ -29,32 +30,9 @@ const FiltersColorsControl = () => {
   const filters = useMemo(() => ({ color: color ? color : {} }), [color]);
   const { result, loading } = useGetProducts(filters);
 
-  const renderItem = ({ item }: { item: Product }) => (
-    <View style={styles.card}>
-      <Image
-        source={{ uri: `${base_url}${item.images[0].url}` }}
-        style={styles.image}
-      />
-      <View style={styles.actions}>
-        <TouchableOpacity onPress={() => addFavorite(item)}>
-          <AntDesign
-            name={
-              favorites.some((el) => el.id === item.id) ? "heart" : "hearto"
-            }
-            size={24}
-            color="rgb(190, 24, 93)"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => addItem(item)}>
-          <AntDesign name="shoppingcart" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Accesorios</Text>
+      <Text style={styles.title}>Enamórate de todos nuestros accesorios</Text>
       <Text style={styles.filter}>Filtrar por color:</Text>
       <View style={styles.pickerContainer}>
         <Picker
@@ -76,16 +54,7 @@ const FiltersColorsControl = () => {
         </Picker>
       </View>
 
-      {loading || !result ? (
-        <Text>Cargando...</Text>
-      ) : (
-        <FlatList
-          numColumns={2}
-          data={result}
-          keyExtractor={(item) => item.productName}
-          renderItem={renderItem}
-        />
-      )}
+      <ListOf filters={filters} />
     </SafeAreaView>
   );
 };
@@ -94,16 +63,19 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
+    textAlign: "center"
   },
   filter: {
     fontSize: 17,
     marginBottom: 10,
+    fontWeight: 600,
+    color: "red"
   },
   pickerContainer: {
     width: 250,

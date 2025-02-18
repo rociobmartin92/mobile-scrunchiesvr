@@ -48,6 +48,7 @@ const Favoritos = () => {
       ) : (
         <ScrollView style={styles.scrollContainer}>
           <FlatList
+          nestedScrollEnabled={true}
             data={items}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}

@@ -49,6 +49,7 @@ const CartPage = () => {
       ) : (
         <ScrollView style={styles.cartContainer}>
           <FlatList
+          nestedScrollEnabled={true}
             data={items}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (

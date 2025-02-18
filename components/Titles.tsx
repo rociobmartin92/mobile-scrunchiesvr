@@ -3,9 +3,9 @@ import React from "react";
 
 const Titles = ({ text, titleStyle }: { text: string; titleStyle?: {} }) => {
   return (
-    <View>
+    <>
       <Text style={[styles.title,  titleStyle ]}>{text}</Text>
-    </View>
+    </>
   );
 };
 
