@@ -54,6 +54,7 @@ const BannerCards = () => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
+    marginTop: 10,
     alignItems: "center",
     height: 180
   },

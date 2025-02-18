@@ -14,6 +14,9 @@ import { useFavorites } from "@/state/use-favorites";
 import { useCart } from "@/state/use-cart";
 import { base_url } from "@/services/api";
 import { AntDesign } from "@expo/vector-icons";
+import Titles from "@/components/Titles";
+
+
 
 const Favoritos = () => {
   const { items, removeFavorite, removeAllFavorites } = useFavorites();
@@ -32,10 +35,14 @@ const Favoritos = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>
-        <AntDesign name="hearto" size={20} color="black" /> Favoritos
-      </Text>
 
+      <View style={styles.header}>
+        <AntDesign name="hearto" size={20} color="black" />
+        <Titles
+          text="Mis favoritos"
+          titleStyle={{ marginBottom: 2, marginLeft: 6 }}
+        />
+      </View>
       {items.length === 0 ? (
         <Text style={styles.emptyText}>No tienes productos en favoritos.</Text>
       ) : (
@@ -63,7 +70,19 @@ const Favoritos = () => {
                     onPress={() => addItem(item)}
                     style={styles.addButton}
                   >
-                    <AntDesign name="plus" size={20} color="black" />
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <AntDesign name="plus" size={17} color="black" />
+                      <Text style={{ fontWeight: 600, fontSize: 15 }}>
+                        {" "}
+                        Comprar
+                      </Text>
+                    </View>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -88,11 +107,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "red",
-    textAlign: "center",
-    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 30,
   },
   emptyText: {
     fontSize: 16,

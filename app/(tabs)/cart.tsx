@@ -15,6 +15,7 @@ import { base_url } from "@/services/api";
 import { AntDesign } from "@expo/vector-icons";
 import Titles from "@/components/Titles";
 
+
 const CartPage = () => {
   const { items, removeItem, removeAll } = useCart();
 
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 20,
-    marginLeft: 10
+    marginLeft: 10,
   },
   clearButton: {
     padding: 10,
