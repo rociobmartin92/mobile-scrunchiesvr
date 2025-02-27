@@ -1,24 +1,25 @@
 import React, { useMemo, useRef, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import useGetColorsList from "@/services/useGetColorsList";
-import useGetProducts from "@/services/useGetProducts";
-import ToastManager, { Toast } from "expo-react-native-toastify";
+import ToastManager from "expo-react-native-toastify";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import ListOf from "./ListOf";
 import { DropdownData, SelectDropdown } from "expo-select-dropdown";
+import { Colors } from "@/constants/Colors";
 
 const FiltersColorsControl = () => {
   const { result: colorResult } = useGetColorsList();
   const colorArray = colorResult.map((el) => {
     return { key: el.id, value: el.color };
   });
-  const [color, setColor] = useState<DropdownData<string, string> | null>(null);
 
-  const filters = useMemo(() => ({ color: color.value ? color.value : {} }), [color]);
+  const allColors = [...colorArray, { key: 1, value: "todos" }];
+  const [color, setColor] = useState<DropdownData<number, string> | null>(null);
 
-console.log("color", color)
-
+  const filters = useMemo(() => ({ color: color ? color.value : {} }), [color]);
+  console.log("colorArray", colorArray);
+  console.log("allColors", allColors);
   console.log("color", color);
 
   return (
@@ -27,11 +28,11 @@ console.log("color", color)
       <Text style={styles.filter}>Filtrar por color:</Text>
       <View style={styles.pickerContainer}>
         <SelectDropdown
-          data={colorArray}
+          data={allColors}
           placeholder={"Elige un color"}
           selected={color}
-          setSelected={(itemValue: string) =>
-            setColor(itemValue === "Todos" ? "" : itemValue)
+          setSelected={(itemValue) =>
+            setColor(itemValue.value === "todos" ? null : itemValue)
           }
           dropdownScrollStyles={{ borderRadius: 10 }}
           searchBoxStyles={{ borderRadius: 15 }}
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginBottom: 10,
     fontWeight: 600,
-    color: "red",
+    color: Colors.light.text,
   },
   pickerContainer: {
     width: 250,
