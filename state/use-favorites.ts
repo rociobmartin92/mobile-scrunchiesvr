@@ -1,8 +1,9 @@
 import { Product } from "@/types";
+import { Toast } from "expo-react-native-toastify";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-
 
 interface Favorites {
   items: Product[];
@@ -23,19 +24,12 @@ export const useFavorites = create<Favorites>()(
         );
 
         if (existingItemInFavorites) {
-          // return toast({
-          //   title: "Ya agregaste este producto a tus favoritos ",
-          // });
-          console.log("sfkjsldkjfñsd")
+          Toast.success("Ya agregaste este producto a tus favoritos 🧡");
         }
         const productMarked = { ...product, favorite: true };
-        console.log("addMark", productMarked);
-        set({ items: [...currentFavorites, productMarked] });
 
-        // toast({
-        //   title: "Agregado a tus favoritos ❤️‍🔥",
-        // });
-        console.log("sfkjsldkjfñsd")
+        set({ items: [...currentFavorites, productMarked] });
+        Toast.success("Agregado a tus favoritos ❤️‍🔥");
       },
 
       removeFavorite: (product) => {
@@ -46,20 +40,15 @@ export const useFavorites = create<Favorites>()(
         const newFavoritesList = currentFavorites.filter(
           (el) => el.id !== removeMarked.id
         );
-        // toast({
-        //   title: "Eliminaste este producto de tus favoritos",
-        // });
-        console.log("sfkjsldkjfñsd")
-  
+        Toast.success("Eliminaste este producto de tus favoritos");
+
         set({ items: newFavoritesList });
       },
 
       removeAllFavorites: () => {
         set({ items: [] });
-        // toast({
-        //   title: "Eliminaste todos tus favoritos",
-        // });
-        console.log("sfkjsldkjfñsd")
+  
+        Toast.success("Eliminaste todos tus favoritos");
       },
     }),
 

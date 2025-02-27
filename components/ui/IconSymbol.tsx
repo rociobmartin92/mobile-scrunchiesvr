@@ -13,7 +13,7 @@ const MAPPING = {
   'cart': 'shopping-cart',
   'bag': 'shopping-bag',
   'person': 'person',
-  'favorite': 'favorite',
+  'star': 'star',
 
 } as Partial<
   Record<

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { Platform } from "react-native";
 
 // URL base de la API (Asegúrate de definir EXPO_PUBLIC_API_URL en tu .env)
 
-export const base_url = process.env.EXPO_PUBLIC_API_URL;
+export const base_url = Platform.OS === "android" ? process.env.EXPO_PUBLIC_API_URL_ANDROID : process.env.EXPO_PUBLIC_API_URL_IOS;
 
 // Instancia de Axios con configuración base
 export const apiInstance = axios.create({

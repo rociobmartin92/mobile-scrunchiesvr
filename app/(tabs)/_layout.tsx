@@ -40,7 +40,7 @@ export default function TabLayout() {
         options={{
           title: "Productos",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="bag" color={color} />
+            <IconSymbol size={22} name="bag" color={color} />
           ),
         }}
       />
@@ -49,7 +49,7 @@ export default function TabLayout() {
         options={{
           title: "Carrito",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="cart" color={color} />
+            <IconSymbol size={22} name="cart" color={color} />
           ),
         }}
       />
@@ -58,7 +58,7 @@ export default function TabLayout() {
         options={{
           title: "Nosotros",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person" color={color} />
+            <IconSymbol size={22} name="person" color={color} />
           ),
         }}
       />
@@ -67,7 +67,7 @@ export default function TabLayout() {
         options={{
           title: "Favoritos",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={24} name="favorite" color={color} />
+            <IconSymbol size={22} name="star" color={color} />
           ),
         }}
       />

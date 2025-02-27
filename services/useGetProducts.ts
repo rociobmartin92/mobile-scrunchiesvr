@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { Product } from "@/types";
 import { apiInstance } from "./api";
+import { Toast } from "expo-react-native-toastify";
 
 const useGetProducts = (filters?: any) => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Product[]>([]);
   const [error, setError] = useState<string>("");
 
-
-  console.log("filters", filters)
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -36,8 +35,8 @@ const useGetProducts = (filters?: any) => {
 
       setResult(response.data.data || []);
     } catch (error) {
-      console.error("Error al obtener los productos:", error);
-      setError("Ocurrió un error al obtener los productos.");
+      console.error('There was a problem with the fetch operation:', error);
+      Toast.error("Ocurrió un error al obtener los productos.");
     } finally {
       setLoading(false);
     }

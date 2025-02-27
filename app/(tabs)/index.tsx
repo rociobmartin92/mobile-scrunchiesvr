@@ -1,24 +1,10 @@
 import React, { useMemo } from "react";
-import { base_url } from "@/services/api";
+import ToastManager from "expo-react-native-toastify";
 
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import { ScrollView } from "react-native-virtualized-view";
+import { LogBox } from "react-native";
 
-import useGetProducts from "@/services/useGetProducts";
-import { useCart } from "@/state/use-cart";
-import { useFavorites } from "@/state/use-favorites";
-
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
-import { Product } from "@/types";
 import Header from "@/components/Header";
 import BannerCards from "@/components/BannerCards";
 import Titles from "@/components/Titles";
@@ -27,6 +13,7 @@ import ChooseCategory from "@/components/ChooseCategory";
 import ListOf from "@/components/ListOf";
 
 const HomeScreen = () => {
+  LogBox.ignoreAllLogs();
   const filters = useMemo(() => ({ bestSeller: true }), []);
 
   return (
@@ -42,9 +29,14 @@ const HomeScreen = () => {
 
           <ListOf filters={filters} />
         </View>
+
+        {/* // Future: Finish this choose category functionality */}
         <ChooseCategory />
+
+        {/* // Future: Apply Lazy Loading for footer */}
         <Footer />
       </ScrollView>
+      <ToastManager />
     </SafeAreaView>
   );
 };

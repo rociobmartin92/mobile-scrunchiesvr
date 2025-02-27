@@ -3,6 +3,7 @@
 import { Category } from "@/types";
 import { useEffect, useState } from "react";
 import { apiInstance } from "./api";
+import { Toast } from "expo-react-native-toastify";
 
 function useGetCategories() {
   const [loading, setLoading] = useState(false);
@@ -17,8 +18,8 @@ function useGetCategories() {
  
         setResult(result.data.data || []);
       } catch (error) {
-        console.log("error in fetch categories", error);
-        setError("Ocurrió un error al obtener las categorías.")
+        console.log("error in fetch categories:", error);
+        Toast.error("Ocurrió un error al obtener las categorías.");
       }
       finally {
         setLoading(false)

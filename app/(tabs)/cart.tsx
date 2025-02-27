@@ -1,20 +1,20 @@
 import React from "react";
+import ToastManager, { Toast } from "expo-react-native-toastify";
 import {
   View,
   Text,
   Image,
   FlatList,
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
   Alert,
   SafeAreaView,
 } from "react-native";
+import { ScrollView } from 'react-native-virtualized-view';
 import { useCart } from "@/state/use-cart";
 import { base_url } from "@/services/api";
 import { AntDesign } from "@expo/vector-icons";
 import Titles from "@/components/Titles";
-
 
 const CartPage = () => {
   const { items, removeItem, removeAll } = useCart();
@@ -38,7 +38,7 @@ const CartPage = () => {
         <AntDesign name="shoppingcart" size={23} color="black" />
         <Titles
           text="Carrito de compras"
-          titleStyle={{ marginBottom: 0, marginLeft: 3 }}
+          titleStyle={{ marginBottom: 2, marginLeft: 10 }}
         />
       </View>
 
@@ -47,9 +47,9 @@ const CartPage = () => {
           Tu carrito está vacío, comienza a llenarlo 🙌🏻
         </Text>
       ) : (
-        <ScrollView style={styles.cartContainer}>
+        <ScrollView scrollEnabled={true} style={styles.cartContainer}>
           <FlatList
-          nestedScrollEnabled={true}
+            nestedScrollEnabled={true}
             data={items}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
@@ -93,6 +93,7 @@ const CartPage = () => {
               <Text style={styles.checkoutText}>Finalizar Compra</Text>
             </TouchableOpacity>
           </View>
+          <ToastManager />
         </ScrollView>
       )}
     </SafeAreaView>

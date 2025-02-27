@@ -16,9 +16,16 @@ const About = () => {
   };
 
   return (
-    <SafeAreaView style={{ justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
+    <SafeAreaView
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        paddingBottom: 20,
+      }}
+    >
       <Header />
-      <ScrollView contentContainerStyle={styles.container}>
+
+      <ScrollView style={styles.container}>
         <Text style={styles.title}>Sobre Mí</Text>
         <View style={styles.separator} />
 
@@ -42,8 +49,9 @@ const About = () => {
             software.
             {"\n\n"}Esta web está creada con las siguientes tecnologías:
             {"\n"}✣ <Text style={styles.highlight}>Front End:</Text> Next.js
-            {"\n"}✣ <Text style={styles.highlight}>Back End:</Text> Strapi{"\n"}
-            ✣ <Text style={styles.highlight}>State Management:</Text> Zustand
+            {"\n"}✣ <Text style={styles.highlight}>Back End:</Text> Strapi
+            {"\n"}✣ <Text style={styles.highlight}>State Management:</Text>{" "}
+            Zustand
             {"\n\n"}
             Cada pieza que hago está hecha con dedicación, cariño y un toque de
             la naturaleza que me rodea. ✨{"\n\n"}¡Espero que encuentres algo
@@ -87,7 +95,6 @@ const About = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "#fff",
   },
   title: {
     fontSize: 22,
@@ -139,6 +146,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 3,
+    marginBottom: 100,
   },
   subtitle: {
     fontSize: 18,

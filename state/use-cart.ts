@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // ✅ Importa AsyncStorage
+import { Toast } from "expo-react-native-toastify";
+import AsyncStorage from "@react-native-async-storage/async-storage"; 
 import { Product } from "@/types";
 
 interface CartStore {
@@ -19,24 +20,26 @@ export const useCart = create<CartStore>()(
         const currentProductsInCart = get().items;
 
         if (currentProductsInCart.some((el) => el.id === product.id)) {
-          console.log("El producto ya está en el carrito.");
+
+          Toast.success("El producto ya está en el carrito.");
           return;
         }
 
         set({ items: [...currentProductsInCart, product] });
-        console.log("Producto agregado al carrito 🛍️");
+
+        Toast.success("Producto agregado al carrito 🛍️");
       },
 
       removeItem: (id) => {
         set((state) => ({
           items: state.items.filter((el) => el.id !== id),
         }));
-        console.log("Producto eliminado del carrito 🗑️");
+        Toast.success("Producto eliminado del carrito 🗑️");
       },
 
       removeAll: () => {
         set({ items: [] });
-        console.log("Carrito eliminado 🗑️");
+        Toast.success("Carrito eliminado 🗑️");
       },
     }),
     {

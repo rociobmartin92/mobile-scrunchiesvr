@@ -1,60 +1,44 @@
 import React, { useMemo, useRef, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import useGetColorsList from "@/services/useGetColorsList";
 import useGetProducts from "@/services/useGetProducts";
-import { Picker } from "@react-native-picker/picker";
-import { AntDesign } from "@expo/vector-icons";
-import { useCart } from "@/state/use-cart";
-import { useFavorites } from "@/state/use-favorites";
-import { Product } from "@/types";
-import { base_url } from "@/services/api";
+import ToastManager, { Toast } from "expo-react-native-toastify";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import ListOf from "./ListOf";
+import { DropdownData, SelectDropdown } from "expo-select-dropdown";
 
 const FiltersColorsControl = () => {
   const { result: colorResult } = useGetColorsList();
-  const colorArray = colorResult.map((el) => el.color);
-  const { addItem } = useCart();
-  const { addFavorite, items: favorites } = useFavorites();
+  const colorArray = colorResult.map((el) => {
+    return { key: el.id, value: el.color };
+  });
+  const [color, setColor] = useState<DropdownData<string, string> | null>(null);
 
-  const [color, setColor] = useState("");
+  const filters = useMemo(() => ({ color: color.value ? color.value : {} }), [color]);
 
-  const pickerRef = useRef();
-  const filters = useMemo(() => ({ color: color ? color : {} }), [color]);
-  const { result, loading } = useGetProducts(filters);
+console.log("color", color)
+
+  console.log("color", color);
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Enamórate de todos nuestros accesorios</Text>
       <Text style={styles.filter}>Filtrar por color:</Text>
       <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={color}
-          onValueChange={(itemValue: string) =>
+        <SelectDropdown
+          data={colorArray}
+          placeholder={"Elige un color"}
+          selected={color}
+          setSelected={(itemValue: string) =>
             setColor(itemValue === "Todos" ? "" : itemValue)
           }
-          style={styles.picker}
-        >
-          <Picker.Item label="Todos" value="Todos" />
-          {colorArray.map((color, index) => (
-            <Picker.Item
-              key={index}
-              label={color.toUpperCase()}
-              value={color}
-              color="#000"
-            />
-          ))}
-        </Picker>
+          dropdownScrollStyles={{ borderRadius: 10 }}
+          searchBoxStyles={{ borderRadius: 15 }}
+        />
       </View>
-
       <ListOf filters={filters} />
+      <ToastManager />
     </SafeAreaView>
   );
 };
@@ -63,26 +47,25 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   filter: {
     fontSize: 17,
     marginBottom: 10,
     fontWeight: 600,
-    color: "red"
+    color: "red",
   },
   pickerContainer: {
     width: 250,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 10,
+
     marginBottom: 20,
+    zIndex: 1,
   },
   picker: {
     width: "100%",

@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { apiInstance } from "./api";
 import { Collection } from "@/types";
+import { Toast } from "expo-react-native-toastify";
 
 function useGetCollections() {
   const [loading, setLoading] = useState(false);
@@ -18,8 +19,8 @@ function useGetCollections() {
 
         setResult(result.data.data || []);
       } catch (error) {
-        console.log("error in fetch colecciones", error);
-        setError("Ocurrió un error al obtener las colecciones.")
+        console.log("error in fetch collections:", error);
+        Toast.error("Ocurrió un error al obtener las colecciones.");
       }
       finally {
         setLoading(false)

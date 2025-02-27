@@ -8,7 +8,9 @@ const Products = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <FiltersColorsControl />
+      <View style={{ height: "65%" }}>
+        <FiltersColorsControl />
+      </View>
     </SafeAreaView>
   );
 };

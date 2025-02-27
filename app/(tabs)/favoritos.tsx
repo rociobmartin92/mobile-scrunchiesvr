@@ -5,18 +5,17 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
   Alert,
+  SafeAreaView,
 } from "react-native";
-
+import ToastManager from "expo-react-native-toastify";
+import { ScrollView } from "react-native-virtualized-view";
 import { useFavorites } from "@/state/use-favorites";
 import { useCart } from "@/state/use-cart";
 import { base_url } from "@/services/api";
 import { AntDesign } from "@expo/vector-icons";
 import Titles from "@/components/Titles";
-
-
 
 const Favoritos = () => {
   const { items, removeFavorite, removeAllFavorites } = useFavorites();
@@ -34,13 +33,13 @@ const Favoritos = () => {
   };
 
   return (
-    <View style={styles.container}>
-
+    <SafeAreaView style={styles.container}>
+      <ToastManager />
       <View style={styles.header}>
-        <AntDesign name="hearto" size={20} color="black" />
+        <AntDesign name="hearto" size={20} color="red" />
         <Titles
           text="Mis favoritos"
-          titleStyle={{ marginBottom: 2, marginLeft: 6 }}
+          titleStyle={{ marginBottom: 2, marginLeft: 10 }}
         />
       </View>
       {items.length === 0 ? (
@@ -48,7 +47,7 @@ const Favoritos = () => {
       ) : (
         <ScrollView style={styles.scrollContainer}>
           <FlatList
-          nestedScrollEnabled={true}
+            nestedScrollEnabled={true}
             data={items}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}
@@ -97,7 +96,7 @@ const Favoritos = () => {
           </TouchableOpacity>
         </ScrollView>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
