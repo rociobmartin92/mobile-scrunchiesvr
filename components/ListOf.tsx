@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { Product, ProductFilters } from "@/types";
 import Loading from "./Loading";
+import { colors } from "@/constants/Colors";
 
 const ListOf = ({ filters }: { filters: ProductFilters }) => {
   const { result, loading } = useGetProducts(filters);
@@ -34,7 +35,7 @@ const ListOf = ({ filters }: { filters: ProductFilters }) => {
               favorites.some((el) => el.id === item.id) ? "heart" : "hearto"
             }
             size={24}
-            color="rgb(190, 24, 93)"
+            color={colors.dark.text}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => addItem(item)}>
@@ -68,7 +69,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 0,
     alignItems: "center",
-    elevation: 5,
+    elevation: 5, // Sombra para Android
+    shadowColor: "#000", // Color de la sombra en iOS
+    shadowOffset: { width: 0, height: 2 }, // Desplazamiento de la sombra
+    shadowOpacity: 0.2, // Opacidad de la sombra
+    shadowRadius: 4, // Difuminado de la sombra
     margin: 10,
   },
   image: {

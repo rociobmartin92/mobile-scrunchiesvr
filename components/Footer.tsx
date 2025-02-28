@@ -1,3 +1,4 @@
+import { useNavigation } from "expo-router";
 import React from "react";
 import {
   View,
@@ -8,6 +9,8 @@ import {
 } from "react-native";
 
 const Footer = () => {
+const navigation = useNavigation()
+
   const openLink = (url: string) => {
     Linking.openURL(url).catch((err) =>
       console.error("Error al abrir el enlace", err)
@@ -31,7 +34,7 @@ const Footer = () => {
           <TouchableOpacity onPress={() => console.log("Ir a Accesorios")}>
             <Text style={styles.link}>Accesorios</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log("Ir a Sobre Nosotros")}>
+          <TouchableOpacity onPress={() => navigation.navigate("about")}>
             <Text style={styles.link}>Sobre Nosotros</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => console.log("Ir a Novedades")}>

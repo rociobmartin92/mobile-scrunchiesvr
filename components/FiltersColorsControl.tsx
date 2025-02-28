@@ -6,7 +6,8 @@ import ToastManager from "expo-react-native-toastify";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ListOf from "./ListOf";
 import { DropdownData, SelectDropdown } from "expo-select-dropdown";
-import { Colors } from "@/constants/Colors";
+import { colors } from "@/constants/Colors";
+
 
 const FiltersColorsControl = () => {
   const { result: colorResult } = useGetColorsList();
@@ -18,9 +19,7 @@ const FiltersColorsControl = () => {
   const [color, setColor] = useState<DropdownData<number, string> | null>(null);
 
   const filters = useMemo(() => ({ color: color ? color.value : {} }), [color]);
-  console.log("colorArray", colorArray);
-  console.log("allColors", allColors);
-  console.log("color", color);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginBottom: 10,
     fontWeight: 600,
-    color: Colors.light.text,
+    color: colors.light.text,
   },
   pickerContainer: {
     width: 250,
